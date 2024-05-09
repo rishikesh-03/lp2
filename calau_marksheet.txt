@@ -1,0 +1,155 @@
+public class Assignment_9 {
+    public Decimal x {get;set;}
+    public Decimal y {get;set;}
+    public Decimal result {get;set;}
+    
+    public pagereference add(){
+        result = x + y;
+        return null;
+    }
+    
+    public pagereference subtract(){
+        result = x - y;
+        return null;
+    }
+    
+    public pagereference multiply(){
+        result = x * y;
+        return null;
+    }
+    
+    public pagereference divide(){
+        result = x / y;
+        return null;
+    }
+    
+    public pagereference square(){
+        result = x * x;
+        return null;
+    }
+    
+    public pagereference sqroot(){
+        result = Math.sqrt(x);
+        return null;
+    }
+    
+    public pagereference power(){
+        result = Math.pow((Integer)x, (Integer)y);
+        return null;
+    }
+}
+
+
+
+<apex:page controller="Assignment_9" sidebar="false">
+    <apex:form>
+    	<apex:pageBlock title="Calculator">
+        	<apex:pageBlockSection columns="1">
+            	<apex:pageBlockSectionItem>
+                	<apex:outputLabel>Enter x value</apex:outputLabel>
+                    <apex:inputText value = "{!x}"></apex:inputText>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem>
+                	<apex:outputLabel>Enter y value</apex:outputLabel>
+                    <apex:inputText value = "{!y}"></apex:inputText>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem>
+                	<apex:outputLabel>Result</apex:outputLabel>
+                    <apex:inputText value = "{!result}"></apex:inputText>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem>
+                	<apex:commandButton value = "Addition" action = "{!add}"></apex:commandButton>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem>
+                	<apex:commandButton value = "Subtraction" action = "{!subtract}"></apex:commandButton>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem>
+                	<apex:commandButton value = "Multiplication" action = "{!multiply}"></apex:commandButton>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem>
+                	<apex:commandButton value = "Division" action = "{!divide}"></apex:commandButton>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem>
+                	<apex:commandButton value = "Square" action = "{!square}"></apex:commandButton>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem>
+                	<apex:commandButton value = "Square Root" action = "{!sqRoot}"></apex:commandButton>
+                </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem>
+                	<apex:commandButton value = "Power" action = "{!power}"></apex:commandButton>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
+
+
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+
+public class StudentMarksheet {
+    public String studName{get;set;}
+    public Decimal mathsMarks{get;set;}
+     public Decimal scienceMarks{get;set;}
+     public Decimal englishMarks{get;set;}
+     public Decimal totalMarks{get;set;}
+     public String percentage1{get;set;}
+     public String grade{get;set;}
+
+    
+    public pagereference generateMarksheet() {
+      
+        totalMarks = mathsMarks + scienceMarks + englishMarks;
+        Decimal percentage = ((totalMarks / 300) * 100).setScale(2);
+        percentage1 = percentage+'%';
+      
+        if (percentage >= 90) {
+            grade = 'A+';
+        } else if (percentage >= 80) {
+            grade = 'A';
+        } else if (percentage >= 70) {
+            grade = 'B';
+        } else if (percentage >= 60) {
+            grade = 'C';
+        } else if (percentage >= 50) {
+            grade = 'D';
+        } else {
+            grade = 'F';
+        }
+        return null;
+    }
+}
+
+<apex:page controller="StudentMarksheet">
+    <apex:form>
+        <apex:pageBlock title="Student Marksheet">
+            <apex:pageBlockSection >
+                
+                <apex:outputLabel>Enter name of the student</apex:outputLabel>
+                <apex:inputText value="{!studName}" />
+                
+                <apex:outputLabel>Enter Maths marks</apex:outputLabel>
+                <apex:inputText value="{!mathsMarks}" />
+                
+                <apex:outputLabel>Enter Science marks</apex:outputLabel>
+                <apex:inputText value="{!scienceMarks}" />
+                
+                <apex:outputLabel>Enter English marks</apex:outputLabel>
+                <apex:inputText value="{!englishMarks}"/>
+                
+                <apex:outputLabel>Total Marks:</apex:outputLabel>
+                <apex:inputText value="{!totalMarks}" />
+                
+                <apex:outputLabel>Percentage:</apex:outputLabel>
+                <apex:inputText value="{!percentage1}" />
+                
+                <apex:outputLabel>Grade:</apex:outputLabel>
+                <apex:inputText value="{!grade}" />
+                
+                <apex:commandButton value="Generate" action="{!generateMarksheet}"/>
+                
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
